@@ -1,4 +1,6 @@
 import Chat from './Chat'
+import SendBar from './SendBar'
 export default function Dashboard() {
-  return <Chat />
+  return <div><Chat />
+  <SendBar /></div>
 }
