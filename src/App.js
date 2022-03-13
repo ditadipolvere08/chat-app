@@ -1,16 +1,32 @@
 import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase_config.js";
+import { auth } from "./firebase_config";
 import Login from "./Login";
-import Dashboard from "./Dashboard.js";
+import Chat from "./Chat";
+import Navbar from "./Navbar"
+import "./style/App.css"
 
 export default function App() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(undefined);
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
     });
   }, []);
 
-  return <div className="App">{user === null ? <Login /> : <Dashboard />}</div>;
+  if (user === undefined) return <h1>Initializing...</h1>;
+
+  return (
+    <div className="App">
+      {user === null ? (
+        <Login />
+      ) : (
+        <div>
+          <Navbar />
+          <Chat />
+        </div>
+      )}
+    </div>
+  );
 }

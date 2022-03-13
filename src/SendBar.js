@@ -1,15 +1,9 @@
-import { onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { auth, firestore } from "./firebase_config";
-import React, { useEffect, useState } from "react";
-import "./SendBar.css";
+import "./style/SendBar.css";
 
 export default function SendBar(params) {
-  const [user, setUser] = useState(null);
-  useEffect(()=>{
-    onAuthStateChanged(auth, (user) => setUser(user));
-
-  },[])
+  const user = auth.currentUser
 
   function submitMessage(event) {
     const text = event.target.message.value;
@@ -22,7 +16,7 @@ export default function SendBar(params) {
       sender_uid: user.uid,
       sender_img: user.photoURL,
       sender_name: user.displayName,
-      sended_at: serverTimestamp(),
+      sended_at: Timestamp.now(),
     });
     event.target.message.value = null;
     event.preventDefault();

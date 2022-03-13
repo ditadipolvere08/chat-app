@@ -1,17 +1,12 @@
 import { auth } from "./firebase_config";
-import { onAuthStateChanged } from "firebase/auth";
-import { useEffect, useState } from "react";
-import "./Message.css";
+import "./style/Message.css";
 
 export default function Message(params) {
-  const [user, setUser] = useState(null);
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => setUser(user));
-  }, []);
+  const user = auth.currentUser;
 
   if (user === null) {
     return <h1>Initializing...</h1>;
-  };
+  }
   return (
     <div
       className={params.sender_uid === user.uid ? "msg sended" : "msg received"}
@@ -22,9 +17,12 @@ export default function Message(params) {
         src={params.photoUrl}
         alt={"Profile_image"}
       />
-      <div className="text">
+      <div className="textDiv">
         <p className="senderName">{params.sender_name}</p>
-      <p className="msgText">{params.text}</p>
+        <p className="msgText">{params.text}</p>{" "}
+        <p className="timestamp">
+          {params.sended_at.toDate().toLocaleString()}
+        </p>
       </div>
     </div>
   );

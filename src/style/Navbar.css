@@ -1,0 +1,21 @@
+.Navbar {
+    border-bottom: 1px solid black;
+    display:flex;
+    padding: 10px;
+    justify-content:space-between;
+    background-color: white;
+    position:sticky;
+    top: 0
+}
+
+.Navbar h1 {
+    margin: 0
+}
+
+.logout {
+    padding: 10px;
+    border: 2px solid blacK;
+    border-radius: 5px;
+    font-size: large;
+    font-weight: bolder;
+}

@@ -1,22 +1,31 @@
 import Message from "./Message";
-import { getDocs, collection, query, orderBy } from "firebase/firestore";
+import {
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+} from "firebase/firestore";
 import { firestore } from "./firebase_config";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import SendBar from "./SendBar";
+import "./style/Chat.css";
 
 export default function Chat() {
   const [messages, setMessages] = useState(null);
-
-  async function refreshMessages() {
-    setMessages(
-      await getDocs(
-        query(collection(firestore, "messages"), orderBy("sended_at"))
-      )
+  const messagesEndRef = useRef(null);
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      query(collection(firestore, "messages"), orderBy("sended_at")),
+      (querySnapshot) => {
+        setMessages(querySnapshot);
+      }
     );
-  }
+  }, []);
 
   useEffect(() => {
-    refreshMessages();
-  }, []);
+    if (messages) {
+    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });}
+  }, [messages]);
 
   if (messages === null) {
     return <h1>Initializing messages...</h1>;
@@ -31,8 +40,12 @@ export default function Chat() {
           photoUrl={message.data().sender_img}
           sender_name={message.data().sender_name}
           sender_uid={message.data().sender_uid}
+          sended_at={message.data().sended_at}
         />
       ))}
+      <div ref={messagesEndRef}></div>
+
+      <SendBar />
     </div>
   );
 }

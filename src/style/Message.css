@@ -1,0 +1,60 @@
+.msg {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 20px;
+  padding: 10px 15px 7px;
+  width: fit-content;
+  box-shadow: 7px 5px 6px black ;
+  gap: 10px;
+}
+
+.received {
+  justify-content: flex-start;
+  align-self:flex-start;
+  background-color: rgb(230, 233, 187);
+}
+
+.sended {
+  justify-content: flex-end;
+  align-self: flex-end;
+  background-color: rgb(143, 219, 229);
+}
+
+.sended > .msgPhoto {
+  order: 1;
+}
+
+.received .timestamp {
+  text-align: right
+}
+
+.msgPhoto {
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+}
+
+.msgText {
+  font-family: 'Roboto Mono', monospace;
+  word-wrap: break-word;
+}
+
+.senderName {
+  font-weight: bold;
+  font-size: large;
+}
+
+
+.textDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.textDiv p {
+  margin: 0
+}
+
+.textDiv .timestamp {
+  font-size: .7em;
+  margin-top: 10px
+}

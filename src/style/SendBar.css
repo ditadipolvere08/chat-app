@@ -1,0 +1,23 @@
+.SendBar {
+    position: sticky;
+    bottom: 20px;
+    height: 50px;
+    display: flex;
+    gap: 10px;
+}
+
+.messageInput {
+    flex-grow: 1;
+    border: 2px solid black;
+    padding: 20px;
+    font-size: large;
+    min-width: 0;
+}
+
+.submitButton {
+    padding: 10px;
+    border: 2px solid blacK;
+    border-radius: 5px;
+    font-size: large;
+    font-weight: bolder;
+}
