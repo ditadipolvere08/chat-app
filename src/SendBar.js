@@ -6,9 +6,9 @@ export default function SendBar(params) {
   const user = auth.currentUser
 
   function submitMessage(event) {
+    event.preventDefault();
     const text = event.target.message.value;
     if (text === "") {
-      event.preventDefault();
       return;
     }
     addDoc(collection(firestore, "messages"), {
@@ -19,9 +19,7 @@ export default function SendBar(params) {
       sended_at: Timestamp.now(),
     });
     event.target.message.value = null;
-    event.preventDefault();
   }
-  if (user === null) return <h1>Initializing...</h1>
 
   return (
     <form onSubmit={submitMessage} className="SendBar">

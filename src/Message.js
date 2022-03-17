@@ -4,9 +4,6 @@ import "./style/Message.css";
 export default function Message(params) {
   const user = auth.currentUser;
 
-  if (user === null) {
-    return <h1>Initializing...</h1>;
-  }
   return (
     <div
       className={params.sender_uid === user.uid ? "msg sended" : "msg received"}

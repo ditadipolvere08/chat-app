@@ -15,7 +15,10 @@ export default function App() {
     });
   }, []);
 
+  // Se l'utente non ha effettuato il login user === null
   if (user === undefined) return <h1>Initializing...</h1>;
+
+  console.log(user?.uid)
 
   return (
     <div className="App">

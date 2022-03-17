@@ -1,10 +1,5 @@
 import Message from "./Message";
-import {
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-} from "firebase/firestore";
+import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import { firestore } from "./firebase_config";
 import { useEffect, useRef, useState } from "react";
 import SendBar from "./SendBar";
@@ -12,9 +7,10 @@ import "./style/Chat.css";
 
 export default function Chat() {
   const [messages, setMessages] = useState(null);
+  // reference per autoscroll
   const messagesEndRef = useRef(null);
   useEffect(() => {
-    const unsubscribe = onSnapshot(
+    onSnapshot(
       query(collection(firestore, "messages"), orderBy("sended_at")),
       (querySnapshot) => {
         setMessages(querySnapshot);
@@ -24,7 +20,8 @@ export default function Chat() {
 
   useEffect(() => {
     if (messages) {
-    messagesEndRef.current.scrollIntoView({ behavior: "smooth" });}
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
   }, [messages]);
 
   if (messages === null) {
