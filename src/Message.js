@@ -11,7 +11,7 @@ export default function Message(params) {
       <img
         referrerPolicy="no-referrer"
         className="msgPhoto"
-        src={params.photoUrl}
+        src={params.photo_url}
         alt={"Profile_image"}
       />
       <div className="textDiv">

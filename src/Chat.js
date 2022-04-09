@@ -34,7 +34,7 @@ export default function Chat() {
         <Message
           key={index}
           text={message.data().text}
-          photoUrl={message.data().sender_img}
+          photo_url={message.data().sender_img}
           sender_name={message.data().sender_name}
           sender_uid={message.data().sender_uid}
           sended_at={message.data().sended_at}
